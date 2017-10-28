@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     function showFormLogin(){
-        return view('index');
+        return view('login');
     }
 
     public function actionLogin(Request $request)
