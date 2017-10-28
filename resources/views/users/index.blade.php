@@ -20,36 +20,32 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="box">
+                    <div class="box-header">
+                        <button class="btn btn-primary pull-left" title="Cadastrar Usuário"><i class="fa fa-users"></i>&nbsp;&nbsp;Cadastrar Usuário</button>
+                    </div>
                     <div class="box-body">
                         <table class="table table-bordered table-striped data-table">
                             <thead>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>CSS grade</th>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Ações</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                    Explorer 4.0
-                                </td>
-                                <td>Win 95+</td>
-                                <td> 4</td>
-                                <td>X</td>
-                            </tr>
-                            <tr>
-                                <td>Trident</td>
-                                <td>Internet
-                                    Explorer 5.0
-                                </td>
-                                <td>Win 95+</td>
-                                <td>5</td>
-                                <td>C</td>
-                            </tr>
+                            @foreach( $users as $user)
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></button>
+                                        &nbsp;&nbsp;
+                                        <button class="btn btn-sm btn-danger" title="Remover"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -66,7 +62,7 @@
             $('.data-table').DataTable({
                 'paging'      : true,
                 'lengthChange': false,
-                'searching'   : true,
+                'searching'   : false,
                 'ordering'    : true,
                 'info'        : true,
                 'autoWidth'   : false

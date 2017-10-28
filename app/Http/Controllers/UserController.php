@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,11 @@ class UserController extends Controller
         return view('dashboard');
     }
 
-    function index(){
-        return view('users.index');
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index',
+            ['users' => $users]
+        );
     }
 }
