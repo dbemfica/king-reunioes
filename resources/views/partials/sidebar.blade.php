@@ -26,6 +26,11 @@
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('users.index') }}">
+                    <i class="fa fa-users"></i> <span>Usuários</span>
+                </a>
+            </li>
         </ul>
     </section>
 </aside>

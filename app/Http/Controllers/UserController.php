@@ -32,4 +32,8 @@ class UserController extends Controller
     function dashboard(){
         return view('dashboard');
     }
+
+    function index(){
+        return view('users.index');
+    }
 }
