@@ -6,6 +6,7 @@ Route::post('/login', 'UserController@actionLogin')->name('actionLogin');
 
 Route::group(['middleware' => 'auth'], function () {
 
+    //USER
     Route::get('/logout', 'UserController@actionLogout')->name('actionLogout');
     Route::get('/dashboard', 'UserController@dashboard')->name('dashboard');
     Route::get('/usuarios', 'UserController@index')->name('users.index');
@@ -14,5 +15,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/usuarios/edit/{id}', 'UserController@showEditForm')->name('users.edit');
     Route::put('/usuarios/formulario', 'UserController@update')->name('users.update');
     Route::delete('/usuarios/delete', 'UserController@delete')->name('users.delete');
+
+    //ROOM
+    Route::get('/salas', 'RoomController@index')->name('rooms.index');
 
 });

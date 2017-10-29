@@ -31,6 +31,11 @@
                     <i class="fa fa-users"></i> <span>Usuários</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('rooms.index') }}">
+                    <i class="fa fa-cubes"></i> <span>Salas</span>
+                </a>
+            </li>
         </ul>
     </section>
 </aside>
