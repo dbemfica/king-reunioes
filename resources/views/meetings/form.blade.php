@@ -49,7 +49,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
                                         <label>Data</label>
-                                        <input type="text" name="date" class="form-control datepicker" placeholder="Data" value="{{ old('name') }}">
+                                        <input type="text" name="date" class="form-control datepicker" placeholder="Data" value="{{ old('date') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-6">

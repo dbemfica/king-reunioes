@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Meeting;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -54,8 +55,12 @@ class MeetingController extends Controller
         $meeting->description = $request->input('description');
 
 
-        if(!$this->checkAvailability($room,$meeting)){
-            return redirect()->route('meetings.form')->withErrors('Está sala já possui uma reunião para ocasião');
+        if(!$this->checkAvailabilityTime($room,$meeting)){
+            return redirect()->route('meetings.form')->withErrors('Está sala já possui uma reunião para ocasião')->withInput();;
+        }
+
+        if(!$this->checkAvailabilityRoomByUser($meeting)){
+            return redirect()->route('meetings.form')->withErrors('Voê não pode reservar mais de uma sala para a mesma ocasião')->withInput();;
         }
 
         if($meeting->save()){
@@ -106,10 +111,21 @@ class MeetingController extends Controller
         return redirect()->route('meetings.index')->with('success', 'Reunião Removida com sucesso!');
     }
 
-    public function checkAvailability($room,$meeting)
+    public function checkAvailabilityTime($room,$meeting)
     {
         foreach( $room->meetings as $m ){
             if( $m->date_time == $meeting->date_time ){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function checkAvailabilityRoomByUser($meeting)
+    {
+        $meetings = Meeting::all();
+        foreach( $meetings as $m ){
+            if( $m->date_time == $meeting->date_time && Auth::user()->id == $meeting->user_id ){
                 return false;
             }
         }
