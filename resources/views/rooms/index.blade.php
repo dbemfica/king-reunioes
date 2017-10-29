@@ -45,7 +45,7 @@
                                     <td>{{ $room->id }}</td>
                                     <td>{{ $room->name }}</td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('rooms.edit',['id' => $room->id]) }}" class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                                         &nbsp;&nbsp;
                                         <button type="button" class="btn btn-sm btn-danger btn-remove" title="Remover"  data-toggle="modal" data-target="#modal-remove"><i class="fa fa-trash"></i></button>
                                     </td>

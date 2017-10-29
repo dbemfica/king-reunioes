@@ -38,4 +38,30 @@ class RoomController extends Controller
             return redirect()->route('rooms.index')->with('success', 'Sala cadastrada com sucesso!');
         }
     }
+
+    public function showEditForm($id)
+    {
+        $room = Room::find($id);
+        return view('rooms.edit',[
+            'room' => $room
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('rooms.edit',['id' => $request->input('id')])->withErrors($validator)->withInput();
+        }
+
+        $room = Room::find($request->input('id'));
+        $room->name = $request->input('name');
+        $room->description = $request->input('description');
+        if($room->save()){
+            return redirect()->route('rooms.index')->with('success', 'Sala atualizada com sucesso!');
+        }
+    }
 }

@@ -20,5 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/salas', 'RoomController@index')->name('rooms.index');
     Route::get('/salas/formulario', 'RoomController@showForm')->name('rooms.form');
     Route::post('/salas/formulario', 'RoomController@create')->name('rooms.create');
+    Route::get('/salas/edit/{id}', 'RoomController@showEditForm')->name('rooms.edit');
+    Route::put('/salas/edit', 'RoomController@update')->name('rooms.update');
 
 });
