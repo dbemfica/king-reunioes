@@ -50,4 +50,10 @@ class MeetingController extends Controller
             return redirect()->route('meetings.index')->with('success', 'Reunião cadastrada com sucesso!');
         }
     }
+
+    public function delete(Request $request)
+    {
+        Meeting::destroy($request->input('id'));
+        return redirect()->route('meetings.index')->with('success', 'Reunião Removida com sucesso!');
+    }
 }
