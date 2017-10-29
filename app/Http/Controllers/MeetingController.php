@@ -56,11 +56,11 @@ class MeetingController extends Controller
 
 
         if(!$this->checkAvailabilityTime($room,$meeting)){
-            return redirect()->route('meetings.form')->withErrors('Está sala já possui uma reunião para ocasião')->withInput();;
+            return redirect()->route('meetings.form')->withErrors('Está sala já possui uma reunião para ocasião')->withInput();
         }
 
         if(!$this->checkAvailabilityRoomByUser($meeting)){
-            return redirect()->route('meetings.form')->withErrors('Voê não pode reservar mais de uma sala para a mesma ocasião')->withInput();;
+            return redirect()->route('meetings.form')->withErrors('Voê não pode reservar mais de uma sala para a mesma ocasião')->withInput();
         }
 
         if($meeting->save()){
@@ -107,7 +107,11 @@ class MeetingController extends Controller
 
     public function delete(Request $request)
     {
-        Meeting::destroy($request->input('id'));
+        $meeting = Meeting::find($request->input('id'));
+        if( $meeting->user_id != Auth::user()->id ){
+            return redirect()->route('meetings.index')->withErrors('Você não pode reunião de outro usuário');
+        }
+        Meeting::destroy($meeting->id);
         return redirect()->route('meetings.index')->with('success', 'Reunião Removida com sucesso!');
     }
 
