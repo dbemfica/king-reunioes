@@ -49,7 +49,7 @@
                                     <td>
                                         <a href="{{ route('users.edit',['id' => $user->id]) }}" class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                                         &nbsp;&nbsp;
-                                        <button class="btn btn-sm btn-danger" title="Remover"><i class="fa fa-trash"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger btn-remove" title="Remover" user-id="{{ $user->id }}" data-toggle="modal" data-target="#modal-remove"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -60,6 +60,30 @@
             </div>
         </div>
     </section>
+    <!-- Modal -->
+    <div class="modal fade" id="modal-remove">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Remover usuário</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deja remover o usuário?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
+                    <form action="{{ route('users.delete') }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" id="modal-remove-id" name="id">
+                        <button type="submit" class="btn btn-primary">Sim</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js.custom')
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
@@ -73,7 +97,11 @@
                 'ordering'    : true,
                 'info'        : true,
                 'autoWidth'   : false
-            })
+            });
+
+            $(".btn-remove").click(function () {
+                $("#modal-remove-id").val( $(this).attr('user-id') )
+            });
         })
     </script>
 @endsection

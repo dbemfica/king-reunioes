@@ -98,4 +98,10 @@ class UserController extends Controller
             return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso!');
         }
     }
+
+    public function delete(Request $request)
+    {
+        User::destroy($request->input('id'));
+        return redirect()->route('users.index')->with('success', 'Usuário Removido com sucesso!');
+    }
 }
