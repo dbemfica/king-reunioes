@@ -47,7 +47,7 @@
                                     <td>
                                         <a href="{{ route('rooms.edit',['id' => $room->id]) }}" class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                                         &nbsp;&nbsp;
-                                        <button type="button" class="btn btn-sm btn-danger btn-remove" title="Remover"  data-toggle="modal" data-target="#modal-remove"><i class="fa fa-trash"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger btn-remove" title="Remover" room-id="{{ $room->id }}" data-toggle="modal" data-target="#modal-remove"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -72,7 +72,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Não</button>
-                    <form action="" method="post">
+                    <form action="{{route('rooms.delete')}}" method="post">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" id="modal-remove-id" name="id">
@@ -95,6 +95,10 @@
                 'ordering'    : true,
                 'info'        : true,
                 'autoWidth'   : false
+            });
+
+            $(".btn-remove").click(function () {
+                $("#modal-remove-id").val( $(this).attr('room-id') )
             });
         })
     </script>

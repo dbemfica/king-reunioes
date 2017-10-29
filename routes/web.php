@@ -22,5 +22,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/salas/formulario', 'RoomController@create')->name('rooms.create');
     Route::get('/salas/edit/{id}', 'RoomController@showEditForm')->name('rooms.edit');
     Route::put('/salas/edit', 'RoomController@update')->name('rooms.update');
+    Route::delete('/salas/delete', 'RoomController@delete')->name('rooms.delete');
 
 });

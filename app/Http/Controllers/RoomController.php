@@ -64,4 +64,10 @@ class RoomController extends Controller
             return redirect()->route('rooms.index')->with('success', 'Sala atualizada com sucesso!');
         }
     }
+
+    public function delete(Request $request)
+    {
+        Room::destroy($request->input('id'));
+        return redirect()->route('rooms.index')->with('success', 'Sala Removida com sucesso!');
+    }
 }
