@@ -6,6 +6,7 @@ Route::post('/login', 'UserController@actionLogin')->name('actionLogin');
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('/logout', 'UserController@actionLogout')->name('actionLogout');
     Route::get('/dashboard', 'UserController@dashboard')->name('dashboard');
     Route::get('/usuarios', 'UserController@index')->name('users.index');
     Route::get('/usuarios/formulario', 'UserController@showForm')->name('users.form');

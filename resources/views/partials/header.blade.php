@@ -29,7 +29,7 @@
                                 <a href="{{ route('users.edit',['id' => auth()->user()->id ]) }}" class="btn btn-default btn-flat">Perfil</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Logout</a>
+                                <a href="{{ route('actionLogout') }}" class="btn btn-default btn-flat">Logout</a>
                             </div>
                         </li>
                     </ul>
