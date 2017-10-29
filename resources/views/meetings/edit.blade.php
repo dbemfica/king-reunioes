@@ -41,7 +41,12 @@
                                         <label>Selecione a Sala</label>
                                         <select name="room_id" class="form-control select2">
                                             @foreach($rooms as $room)
-                                                <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                                @if( $room->id == $meeting->room_id )
+                                                    <option selected value="{{ $room->id }}">{{ $room->name }}</option>
+                                                @else
+                                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                                @endif
+
                                             @endforeach
                                         </select>
                                     </div>
