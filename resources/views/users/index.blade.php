@@ -17,11 +17,18 @@
         </ol>
     </section>
     <section class="content">
+        @if ( session()->has('success') )
+            <div class="alert alert-success">
+                <ul>
+                    <li>{{ session()->get('success') }}</li>
+                </ul>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <button class="btn btn-primary pull-left" title="Cadastrar Usuário"><i class="fa fa-users"></i>&nbsp;&nbsp;Cadastrar Usuário</button>
+                        <a href="{{ route('users.form') }}" class="btn btn-primary" title="Cadastrar Usuário"><i class="fa fa-users"></i>&nbsp;&nbsp;Cadastrar Usuário</a>
                     </div>
                     <div class="box-body">
                         <table class="table table-bordered table-striped data-table">

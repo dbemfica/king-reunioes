@@ -41,4 +41,31 @@ class UserController extends Controller
             ['users' => $users]
         );
     }
+
+    public function showForm()
+    {
+        return view('users.form');
+    }
+
+    public function create(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('users.form')->withErrors($validator)->withInput();
+        }
+
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        if($user->save()){
+            return redirect()->route('users.index')->with('success', 'Usuário cadastrado com sucesso!');
+        }
+        return redirect()->route('users.form')->withErrors("Erro inesperado aconteceu, por favor tente novamente mais tarde");
+    }
 }
