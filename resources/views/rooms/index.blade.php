@@ -17,6 +17,13 @@
         </ol>
     </section>
     <section class="content">
+        @if ( session()->has('error') )
+            <div class="alert alert-danger">
+                <ul>
+                    <li>{{ session()->get('error') }}</li>
+                </ul>
+            </div>
+        @endif
         @if ( session()->has('success') )
             <div class="alert alert-success">
                 <ul>

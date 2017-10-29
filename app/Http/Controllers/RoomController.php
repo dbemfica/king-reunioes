@@ -67,7 +67,15 @@ class RoomController extends Controller
 
     public function delete(Request $request)
     {
-        Room::destroy($request->input('id'));
+        try{
+            Room::destroy($request->input('id'));
+        } catch(\Exception $erro){
+            if( $erro->errorInfo[1] == 1451 ){
+                return redirect()->route('rooms.index')->with('error', 'Você não pode remover uma sala que possua reuniões');
+            }else{
+                return redirect()->route('rooms.index')->with('error', 'Erro ao remover esta sala, por favor tente mais tarde');
+            }
+        }
         return redirect()->route('rooms.index')->with('success', 'Sala Removida com sucesso!');
     }
 }
