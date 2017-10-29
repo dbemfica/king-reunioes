@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //MEETING
     Route::get('/reunioes', 'MeetingController@index')->name('meetings.index');
-    Route::get('/reunioes/formulario', 'MeetingController@showForm')->name('meetings.form');
+    Route::get('/reunioes/formulario/{room?}/{date?}', 'MeetingController@showForm')->name('meetings.form');
     Route::post('/reunioes/formulario', 'MeetingController@create')->name('meetings.create');
     Route::get('/reunioes/edit/{id}', 'MeetingController@showEditForm')->name('meetings.edit');
     Route::put('/reunioes/edit', 'MeetingController@update')->name('meetings.update');

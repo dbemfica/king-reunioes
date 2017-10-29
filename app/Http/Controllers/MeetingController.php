@@ -19,12 +19,14 @@ class MeetingController extends Controller
         );
     }
 
-    public function showForm()
+    public function showForm($room = null,$date = null)
     {
         $rooms = Room::all();
-        return view('meetings.form',
-            ['rooms' => $rooms]
-        );
+        return view('meetings.form',[
+            'rooms' => $rooms,
+            'room_parameter' => $room,
+            'date_parameter' => $date
+        ]);
     }
 
     public function create(Request $request)

@@ -66,7 +66,7 @@
                                     <td>{{ Carbon\Carbon::parse($schendule['date'])->format('d/m/Y H:i:s') }}</td>
                                     @if($schendule['available'])
                                         <td><span class="label label-success">Disponível</span></td>
-                                        <td><a class="btn btn-sm btn-primary" title="Agendas para {{ Carbon\Carbon::parse($schendule['date'])->format('d/m/Y H:i:s') }}"><i class="fa fa-calendar-check-o"></i></a></td>
+                                        <td><a href="{{route('meetings.form',['room' => $schendule['room_id'], 'date' => $schendule['date']])}}" class="btn btn-sm btn-primary" title="Agendas para {{ Carbon\Carbon::parse($schendule['date'])->format('d/m/Y H:i:s') }}"><i class="fa fa-calendar-check-o"></i></a></td>
                                     @else
                                         <td><span class="label label-danger">Indisponível</span></td>
                                         <td></td>

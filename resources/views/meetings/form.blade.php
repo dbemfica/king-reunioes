@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="box box-primary">
-                    <form {{ route('meetings.create') }} method="post">
+                    <form action="{{ route('meetings.create') }}" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-body">
                             <div class="row">
@@ -39,7 +39,11 @@
                                         <label>Selecione a Sala</label>
                                         <select name="room_id" class="form-control select2">
                                             @foreach($rooms as $room)
-                                                <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                                @if( $room->id == $room_parameter )
+                                                    <option selected value="{{ $room->id }}">{{ $room->name }}</option>
+                                                @else
+                                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -49,7 +53,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
                                         <label>Data</label>
-                                        <input type="text" name="date" class="form-control datepicker" placeholder="Data" value="{{ old('date') }}">
+                                        <input type="text" name="date" class="form-control datepicker" placeholder="Data" value="{{ (old('date'))? old('date'): Carbon\Carbon::parse($date_parameter)->format('d/m/Y') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-6">
@@ -57,7 +61,11 @@
                                         <label>Hora</label>
                                         <select name="time" class="form-control select2">
                                             @for ($i = 0; $i < 24; $i++)
-                                                <option value="{{ str_pad($i, 2, "0", STR_PAD_LEFT) }}:00:00">{{ str_pad($i, 2, "0", STR_PAD_LEFT) }}:00</option>
+                                                @if( $i == (int)Carbon\Carbon::parse($date_parameter)->format('H') )
+                                                    <option selected value="{{ str_pad($i, 2, "0", STR_PAD_LEFT) }}:00:00">{{ str_pad($i, 2, "0", STR_PAD_LEFT) }}:00</option>
+                                                @else
+                                                    <option value="{{ str_pad($i, 2, "0", STR_PAD_LEFT) }}:00:00">{{ str_pad($i, 2, "0", STR_PAD_LEFT) }}:00</option>
+                                                @endif
                                             @endfor
                                         </select>
                                     </div>
