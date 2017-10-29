@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Usuários</span>
                         <span class="info-box-number">{{ $usersCount }}</span>
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+                    <span class="info-box-icon bg-red"><i class="fa fa-cubes"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Salas</span>
                         <span class="info-box-number">{{ $roomsCount }}</span>
@@ -35,7 +35,7 @@
             <div class="clearfix visible-sm-block"></div>
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                    <span class="info-box-icon bg-green"><i class="fa fa-calendar-check-o"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Reuniões</span>
                         <span class="info-box-number">{{ $meetingsCount }}</span>
