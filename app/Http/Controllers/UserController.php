@@ -66,6 +66,38 @@ class UserController extends Controller
         if($user->save()){
             return redirect()->route('users.index')->with('success', 'Usuário cadastrado com sucesso!');
         }
-        return redirect()->route('users.form')->withErrors("Erro inesperado aconteceu, por favor tente novamente mais tarde");
+    }
+
+    public function showEditForm($id)
+    {
+        $user = User::find($id);
+        return view('users.edit',[
+            'user' => $user
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('users.edit',['id' => $request->input('id')])->withErrors($validator)->withInput();
+        }
+
+        $user = User::find($request->input('id'));
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        if( $request->input('password') !== null ){
+            $user->password = bcrypt($request->input('password'));
+        }
+
+        $user->password = bcrypt($request->input('password'));
+        if($user->save()){
+            return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso!');
+        }
     }
 }

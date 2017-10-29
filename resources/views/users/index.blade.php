@@ -47,7 +47,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></button>
+                                        <a href="{{ route('users.edit',['id' => $user->id]) }}" class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                                         &nbsp;&nbsp;
                                         <button class="btn btn-sm btn-danger" title="Remover"><i class="fa fa-trash"></i></button>
                                     </td>
