@@ -94,8 +94,6 @@ class UserController extends Controller
         if( $request->input('password') !== null ){
             $user->password = bcrypt($request->input('password'));
         }
-
-        $user->password = bcrypt($request->input('password'));
         if($user->save()){
             return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso!');
         }
