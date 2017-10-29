@@ -7,7 +7,6 @@ use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 class MeetingController extends Controller
 {
@@ -43,9 +42,13 @@ class MeetingController extends Controller
         $meeting = new Meeting();
         $meeting->user_id = Auth::user()->id;
         $meeting->room_id = $request->input('room_id');
-        $meeting->date_time = Carbon::parse($request->input('date').$request->input('time'))->format('Y-m-d H:i:s');
+
+        $data_time = \DateTime::createFromFormat('d/m/Y H:i:s', $request->input('date').' '.$request->input('time'));
+        $meeting->date_time = $data_time->format('Y-m-d H:i:s');
+
         $meeting->name = $request->input('name');
         $meeting->description = $request->input('description');
+
         if($meeting->save()){
             return redirect()->route('meetings.index')->with('success', 'Reunião cadastrada com sucesso!');
         }
@@ -77,7 +80,10 @@ class MeetingController extends Controller
         $meeting = Meeting::find($request->input('id'));
         $meeting->user_id = Auth::user()->id;
         $meeting->room_id = $request->input('room_id');
-        $meeting->date_time = Carbon::parse($request->input('date').$request->input('time'))->format('Y-m-d H:i:s');
+
+        $data_time = \DateTime::createFromFormat('d/m/Y H:i:s', $request->input('date').' '.$request->input('time'));
+        $meeting->date_time = $data_time->format('Y-m-d H:i:s');
+
         $meeting->name = $request->input('name');
         $meeting->description = $request->input('description');
         if($meeting->save()){
