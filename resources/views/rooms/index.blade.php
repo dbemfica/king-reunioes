@@ -28,7 +28,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a href="" class="btn btn-primary" title="Cadastrar Sala"><i class="fa fa-cubes"></i>&nbsp;&nbsp;Cadastrar Sala</a>
+                        <a href="{{ route('rooms.form') }}" class="btn btn-primary" title="Cadastrar Sala"><i class="fa fa-cubes"></i>&nbsp;&nbsp;Cadastrar Sala</a>
                     </div>
                     <div class="box-body">
                         <table class="table table-bordered table-striped data-table">

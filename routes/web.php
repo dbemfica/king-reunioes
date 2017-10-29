@@ -18,5 +18,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //ROOM
     Route::get('/salas', 'RoomController@index')->name('rooms.index');
+    Route::get('/salas/formulario', 'RoomController@showForm')->name('rooms.form');
+    Route::post('/salas/formulario', 'RoomController@create')->name('rooms.create');
 
 });
