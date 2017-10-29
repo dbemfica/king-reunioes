@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="box box-primary">
-                    <form role="form" method="post">
+                    <form {{ route('users.create') }} method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-body">
                             <div class="form-group">
