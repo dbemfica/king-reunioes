@@ -35,7 +35,10 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Data e Hora</th>
                                 <th>Nome</th>
+                                <th>Sala</th>
+                                <th>Usuário que marcou</th>
                                 <th>Ações</th>
                             </tr>
                             </thead>
@@ -43,7 +46,10 @@
                             @foreach( $meetings as $meeting)
                                 <tr>
                                     <td>{{ $meeting->id }}</td>
+                                    <td>{{ Carbon\Carbon::parse($meeting->date_time)->format('d/m/Y H:i:s') }}</td>
                                     <td>{{ $meeting->name }}</td>
+                                    <td>{{ $meeting->room->name }}</td>
+                                    <td>{{ $meeting->user->name }}</td>
                                     <td>
                                         <a href="{{ route('meetings.edit',['id' => $meeting->id]) }}" class="btn btn-sm btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                                         &nbsp;&nbsp;
