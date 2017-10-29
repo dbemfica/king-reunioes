@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Meeting;
+use App\Models\Room;
 use App\Models\User;
+use Faker\Provider\DateTime;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +40,46 @@ class UserController extends Controller
     }
 
     function dashboard(){
-        return view('dashboard');
+
+        $rooms = Room::All();
+        $meetings = Meeting::All();
+
+        //COUNTS
+        $usersCount = User::All()->count();
+        $roomsCount = $rooms->count();
+        $meetingsCount = $meetings->count();
+
+        //SCHENDULES
+        $data = [];
+        $now = new \DateTime();
+        $now->setTime($now->format('H'),0,0);
+
+        $j = 0;
+        for( $i = 0; $i < 48; $i++ ){
+            $now->add(new \DateInterval("PT1H"));
+            foreach ($rooms as $room){
+                $data[$j]['room_name'] = $room->name;
+                $data[$j]['room_id'] = $room->id;
+                $data[$j]['date'] = $now->format('Y-m-d H:i:s');
+                foreach ($meetings as $meeting){
+                    if( $meeting->room_id == $data[$j]['room_id'] && $meeting->date_time == $data[$j]['date'] ){
+                        $data[$j]['available'] = false;
+                        break;
+                    }
+                    $data[$j]['available'] = true;
+                }
+                $j++;
+            }
+        }
+
+        $schendules = new Collection($data);
+
+        return view('dashboard',[
+            'usersCount' => $usersCount,
+            'roomsCount' => $roomsCount,
+            'meetingsCount' => $meetingsCount,
+            'schendules' => $schendules,
+        ]);
     }
 
     public function index()

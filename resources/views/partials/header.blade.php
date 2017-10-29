@@ -1,10 +1,8 @@
 <header class="main-header">
-
     <a href="index2.html" class="logo">
-        <span class="logo-mini"><b>A</b>LT</span>
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-mini"><b>K</b>R</span>
+        <span class="logo-lg"><b>KIng</b>Reuniões</span>
     </a>
-
     <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
@@ -13,15 +11,12 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs">{{ \Illuminate\Support\Facades\Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                {{ \Illuminate\Support\Facades\Auth::user()->name }}
                             </p>
                         </li>
                         <li class="user-footer">
