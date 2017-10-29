@@ -39,15 +39,24 @@ class MeetingController extends Controller
             return redirect()->route('meetings.form')->withErrors($validator)->withInput();
         }
 
+        //LOAD DATA OF ROOM
+        $room = Room::find($request->input('room_id'));
+
+
         $meeting = new Meeting();
         $meeting->user_id = Auth::user()->id;
-        $meeting->room_id = $request->input('room_id');
+        $meeting->room_id = $room->id;
 
         $data_time = \DateTime::createFromFormat('d/m/Y H:i:s', $request->input('date').' '.$request->input('time'));
         $meeting->date_time = $data_time->format('Y-m-d H:i:s');
 
         $meeting->name = $request->input('name');
         $meeting->description = $request->input('description');
+
+
+        if(!$this->checkAvailability($room,$meeting)){
+            return redirect()->route('meetings.form')->withErrors('Está sala já possui uma reunião para ocasião');
+        }
 
         if($meeting->save()){
             return redirect()->route('meetings.index')->with('success', 'Reunião cadastrada com sucesso!');
@@ -95,5 +104,15 @@ class MeetingController extends Controller
     {
         Meeting::destroy($request->input('id'));
         return redirect()->route('meetings.index')->with('success', 'Reunião Removida com sucesso!');
+    }
+
+    public function checkAvailability($room,$meeting)
+    {
+        foreach( $room->meetings as $m ){
+            if( $m->date_time == $meeting->date_time ){
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -11,4 +11,9 @@ class Room extends Authenticatable
     protected $fillable = [
         'name', 'description'
     ];
+
+    public function meetings()
+    {
+        return $this->hasMany(Meeting::class);
+    }
 }
