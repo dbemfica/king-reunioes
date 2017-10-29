@@ -24,4 +24,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/salas/edit', 'RoomController@update')->name('rooms.update');
     Route::delete('/salas/delete', 'RoomController@delete')->name('rooms.delete');
 
+    //MEETING
+    Route::get('/reunioes', 'MeetingController@index')->name('meetings.index');
+    Route::get('/reunioes/formulario', 'MeetingController@showForm')->name('meetings.form');
+    Route::post('/reunioes/formulario', 'MeetingController@create')->name('meetings.create');
+    Route::get('/reunioes/edit/{id}', 'MeetingController@showEditForm')->name('meetings.edit');
+    Route::put('/reunioes/edit', 'MeetingController@update')->name('meetings.update');
+    Route::delete('/reunioes/delete', 'MeetingController@delete')->name('meetings.delete');
+
 });

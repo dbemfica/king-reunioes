@@ -36,6 +36,11 @@
                     <i class="fa fa-cubes"></i> <span>Salas</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('meetings.index') }}">
+                    <i class="fa fa-calendar-check-o"></i> <span>Reuniões</span>
+                </a>
+            </li>
         </ul>
     </section>
 </aside>
