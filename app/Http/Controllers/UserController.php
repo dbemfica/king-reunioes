@@ -61,11 +61,15 @@ class UserController extends Controller
                 $data[$j]['room_name'] = $room->name;
                 $data[$j]['room_id'] = $room->id;
                 $data[$j]['date'] = $now->format('Y-m-d H:i:s');
-                foreach ($meetings as $meeting){
-                    if( $meeting->room_id == $data[$j]['room_id'] && $meeting->date_time == $data[$j]['date'] ){
-                        $data[$j]['available'] = false;
-                        break;
+                if( count($meetings) > 0 ){
+                    foreach ($meetings as $meeting){
+                        if( $meeting->room_id == $data[$j]['room_id'] && $meeting->date_time == $data[$j]['date'] ){
+                            $data[$j]['available'] = false;
+                            break;
+                        }
+                        $data[$j]['available'] = true;
                     }
+                }else{
                     $data[$j]['available'] = true;
                 }
                 $j++;

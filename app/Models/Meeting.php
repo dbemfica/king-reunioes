@@ -9,7 +9,7 @@ class Meeting extends Authenticatable
 {
 
     protected $fillable = [
-        'name', 'description','data_time'
+        'user_id','room_id','name', 'description','date_time'
     ];
 
     public function user()

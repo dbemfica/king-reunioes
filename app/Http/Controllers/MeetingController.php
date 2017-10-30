@@ -93,6 +93,9 @@ class MeetingController extends Controller
             return redirect()->route('meetings.edit',['id' => $request->input('id')])->withErrors($validator)->withInput();
         }
 
+        //LOAD DATA OF ROOM
+        $room = Room::find($request->input('room_id'));
+
         $meeting = Meeting::find($request->input('id'));
         $meeting->user_id = Auth::user()->id;
         $meeting->room_id = $request->input('room_id');
@@ -102,6 +105,15 @@ class MeetingController extends Controller
 
         $meeting->name = $request->input('name');
         $meeting->description = $request->input('description');
+
+        if(!$this->checkAvailabilityTime($room,$meeting)){
+            return redirect()->route('meetings.form')->withErrors('Está sala já possui uma reunião para ocasião')->withInput();
+        }
+
+        if(!$this->checkAvailabilityRoomByUser($meeting)){
+            return redirect()->route('meetings.form')->withErrors('Voê não pode reservar mais de uma sala para a mesma ocasião')->withInput();
+        }
+
         if($meeting->save()){
             return redirect()->route('meetings.index')->with('success', 'Reunião atualizada com sucesso!');
         }
