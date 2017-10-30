@@ -6,7 +6,7 @@ Um sistema para gerenciamento de salas de reuniões usando PHP 7.1 e o framework
 Copie o arquivo .env.example e o renomeia para .env
 
 #### Banco de Dados
-Configurações do banco de dados estão no arquivo .env, o banco dados ultilizado foi o MySQL 5.7
+Configurações do banco de dados está no arquivo .env, o banco dados ultilizado foi o MySQL 5.7
 
 #### Banco de Dados para os testes automatizados
 - Sqlite
